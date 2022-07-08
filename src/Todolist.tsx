@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import {FilterValueType} from "./App";
+import {Button} from "./components/Button";
 
 type TasksPropsType = {
     id: string
@@ -59,7 +60,7 @@ export const Todolist = (props: TodolistPropsType) => {
                     onKeyPress={onKeyPressHandler}
                     className={error ? 'error' : ''}
                 />
-                <button onClick={addTaskHandler}>+</button>
+                <Button name={'+'} callBack={addTaskHandler}/>
                 {error && <div className={'errorMessage'}>{error}</div>}
             </div>
             <ul>
@@ -71,15 +72,15 @@ export const Todolist = (props: TodolistPropsType) => {
                                    onChange={(e) => onChangeTaskStatusHandler(t.id, e)}
                             />
                             <span>{t.title}</span>
-                            <button onClick={() => props.removeTask(t.id)}>x</button>
+                            <Button name={'x'} callBack={() => props.removeTask(t.id)}/>
                         </li>
                     )
                 })}
             </ul>
             <div>
-                <button className={props.filter === 'all' ? "activeFilter" : ''} onClick={() => onClickFilterHandler('all')}>All</button>
-                <button className={props.filter === 'active' ? "activeFilter" : ''} onClick={() => onClickFilterHandler('active')}>Active</button>
-                <button className={props.filter === 'completed' ? "activeFilter" : ''} onClick={() => onClickFilterHandler('completed')}>Completed</button>
+                <Button name={'All'} callBack={() => onClickFilterHandler('all')} className={props.filter === 'all' ? "activeFilter" : ''}/>
+                <Button name={'Active'} callBack={() => onClickFilterHandler('active')} className={props.filter === 'active' ? "activeFilter" : ''}/>
+                <Button name={'Completed'} callBack={() => onClickFilterHandler('completed')} className={props.filter === 'completed' ? "activeFilter" : ''}/>
             </div>
         </div>
     )
