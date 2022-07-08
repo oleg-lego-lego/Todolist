@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import {FilterValueType} from "./App";
 import {Button} from "./components/Button";
+import {Input} from "./components/Input";
 
 type TasksPropsType = {
     id: string
@@ -35,10 +36,6 @@ export const Todolist = (props: TodolistPropsType) => {
         }
     }
 
-    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
-
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
         if (e.key === 'Enter') {
@@ -54,12 +51,7 @@ export const Todolist = (props: TodolistPropsType) => {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input
-                    value={title}
-                    onChange={onChangeInputHandler}
-                    onKeyPress={onKeyPressHandler}
-                    className={error ? 'error' : ''}
-                />
+                <Input callBack={setTitle} title={title} onKeyPress={onKeyPressHandler} className={error}/>
                 <Button name={'+'} callBack={addTaskHandler}/>
                 {error && <div className={'errorMessage'}>{error}</div>}
             </div>
